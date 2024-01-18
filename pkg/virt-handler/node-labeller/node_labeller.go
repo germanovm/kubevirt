@@ -411,6 +411,7 @@ func (n *NodeLabeller) shouldAddCPUModelLabel(
 	missingFeatures := make([]string, 0)
 	for f := range requiredFeatures {
 		if _, isFeatureSupported := featureLabels[kubevirtv1.CPUFeatureLabel+f]; !isFeatureSupported {
+			n.logger.Warningf("CPU model %s is missing required feature %s", cpuModelName, f)
 			missingFeatures = append(missingFeatures, f)
 		}
 	}
